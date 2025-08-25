@@ -2,31 +2,30 @@ import os
 from crewai import Agent, Task, Crew
 from crewai_tools import SerperDevTool
 
-os.environ["SERPER_API_KEY"] = "SUA_CHAVE_AQUI"
-os.environ["OPENAI_API_KEY"] = "SUA_CHAVE_OPENAI_AQUI"
+# Configurar chaves de API
+os.environ["SERPER_API_KEY"] = "SUA_CHAVE_SERPER"
+os.environ["OPENAI_API_KEY"] = "SUA_CHAVE_OPENAI"
 
+# Ferramenta de busca
 search_tool = SerperDevTool()
 
+# Criar agente
 agent = Agent(
     role="Pesquisador",
-    goal="Encontrar e resumiar as ultimas notícias de IA",
-    backstory="Você é um pesquisador em uma grande empresa. Você é responsável por analisar dados e fornecer insights para o negócio."
+    goal="Encontrar e resumir as últimas notícias de IA",
+    backstory="Você é um pesquisador experiente que busca informações relevantes.",
 )
 
-
-print("Agente criado:",agent.role)
-
+# Criar tarefa
 task = Task(
-    description="Encontrar e resumir as últimas notícias de IA",
-    expected_output="Um resumo em lista de tópicos das 5 notícias de IA mais importantes.",
+    description="Pesquise e resuma as últimas 3 notícias sobre IA",
+    expected_output="Um resumo em tópicos das 3 principais notícias de IA.",
     agent=agent,
-    tools=[search_tool]
+    tools=[search_tool],
 )
 
-crew = Crew(
-    agents=[agent],
-    tasks=[task]
-)
+# Criar crew e rodar
+crew = Crew(agents=[agent], tasks=[task])
+resultado = crew.kickoff()
 
-result = crew.kickoff()
-print(result)
+print("Resultado da pesquisa:\n", resultado)
