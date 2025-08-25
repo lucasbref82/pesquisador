@@ -3,8 +3,8 @@ from crewai import Agent, Task, Crew
 from crewai_tools import SerperDevTool
 
 # Configurar chaves de API
-os.environ["SERPER_API_KEY"] = "SUA_CHAVE_SERPER"
-os.environ["OPENAI_API_KEY"] = "SUA_CHAVE_OPENAI"
+serperApiKey = os.environ["SERPER_API_KEY"]
+openAiKey = os.environ["OPENAI_API_KEY"]
 
 # Ferramenta de busca
 search_tool = SerperDevTool()
