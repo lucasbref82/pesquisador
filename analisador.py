@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew, Process
 from crewai_tools import SerperDevTool
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 
 load_dotenv()
 
@@ -53,7 +53,7 @@ tarefa_tecnica = Task(
 equipe = Crew(
     agents=[analista_fundamentalista, analista_tecnico],
     tasks=[tarefa_fundamendalista, tarefa_tecnica],
-    verbose=2,
+    verbose=True,
     process=Process.sequential
 )
 
